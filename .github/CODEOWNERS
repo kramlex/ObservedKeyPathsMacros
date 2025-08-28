@@ -1,0 +1,17 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# they will be requested for review when someone opens a pull request.
+*       @kramlex
+
+# Specific file patterns
+*.swift @kramlex
+Package.swift @kramlex
+README.md @kramlex
+
+# Documentation
+/docs/ @kramlex
+*.md @kramlex
+
+# Configuration files
+.github/ @kramlex
+.swiftlint.yml @kramlex
