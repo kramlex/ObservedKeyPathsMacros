@@ -4,11 +4,11 @@ import SwiftSyntaxMacrosTestSupport
 import XCTest
 
 final class ObservedKeyPathsMacrosTests: XCTestCase {
-    
+
     let testMacros: [String: Macro.Type] = [
         "GenerateObservedKeyPaths": GenerateObservedKeyPathsMacro.self
     ]
-    
+
     func testBasicMacroExpansion() throws {
         assertMacroExpansion(
             """
@@ -50,7 +50,7 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
             macros: testMacros
         )
     }
-    
+
     func testMacroWithObservationTracked() throws {
         assertMacroExpansion(
             """
@@ -90,7 +90,7 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
             macros: testMacros
         )
     }
-    
+
     func testMacroWithObservationIgnored() throws {
         assertMacroExpansion(
             """
@@ -130,7 +130,7 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
             macros: testMacros
         )
     }
-    
+
     func testMacroWithStaticProperties() throws {
         assertMacroExpansion(
             """
@@ -170,7 +170,7 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
             macros: testMacros
         )
     }
-    
+
     func testMacroWithComputedProperties() throws {
         assertMacroExpansion(
             """
@@ -214,7 +214,7 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
             macros: testMacros
         )
     }
-    
+
     func testMacroWithStruct() throws {
         assertMacroExpansion(
             """
@@ -256,7 +256,7 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
             macros: testMacros
         )
     }
-    
+
     func testMacroWithActor() throws {
         assertMacroExpansion(
             """
@@ -298,7 +298,7 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
             macros: testMacros
         )
     }
-    
+
     func testMacroWithEmptyClass() throws {
         assertMacroExpansion(
             """

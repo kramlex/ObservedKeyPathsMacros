@@ -36,7 +36,7 @@ public extension Observable where Self: ObservationType {
 public final class ObservableObjectPublisherHolder {
     public let objectWillChange: ObservableObjectPublisher
     public let anyPublisher: AnyPublisher<Void, Never>
-    
+
     public init(_ anyPublisher: @autoclosure @escaping () -> AnyPublisher<Void, Never>) {
         let observableObjectPublisher = ObservableObjectPublisher()
         self.objectWillChange = observableObjectPublisher
@@ -47,11 +47,11 @@ public final class ObservableObjectPublisherHolder {
                 observableObjectPublisher?.send()
             }
     }
-    
+
     deinit {
         cancellable.cancel()
     }
-    
+
     private var cancellable: AnyCancellable
 }
 
