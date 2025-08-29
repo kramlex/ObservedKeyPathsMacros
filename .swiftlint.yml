@@ -5,6 +5,7 @@ disabled_rules:
   - file_length
   - type_body_length
   - cyclomatic_complexity
+в  - unused_closure_parameter
 
 opt_in_rules:
   - empty_count

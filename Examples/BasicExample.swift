@@ -1,12 +1,13 @@
-import SwiftUI
-import ObservedKeyPaths
 import Observation
+import ObservedKeyPaths
+import SwiftUI
+import Combine
 
 // MARK: - Basic Example
 
 @Observable
 @GenerateObservedKeyPaths
-class UserProfile {
+final class UserProfile {
     var name: String = ""
     var email: String = ""
     var age: Int = 0
@@ -21,9 +22,9 @@ class UserProfile {
 
 @Observable
 @GenerateObservedKeyPaths
-class Settings {
-    @ObservationTracked var theme: String = "light"
-    @ObservationTracked var fontSize: Int = 14
+final class Settings {
+    var theme: String = "light"
+    var fontSize: Int = 14
     
     var internalId: String = "123" // This won't be tracked
     
@@ -34,7 +35,7 @@ class Settings {
 
 @Observable
 @GenerateObservedKeyPaths
-class DataModel {
+final class DataModel {
     var importantData: String = ""
     
     @ObservationIgnored var cachedData: String = "" // This won't be tracked
@@ -45,7 +46,7 @@ class DataModel {
 
 @Observable
 @GenerateObservedKeyPaths
-class Counter {
+final class Counter {
     var count: Int = 0
     
     func increment() {
@@ -87,7 +88,7 @@ struct ExampleView: View {
                 .font(.caption)
                 .foregroundColor(.secondary)
             
-            ForEach(Array(userProfile.observedKeyPaths.enumerated()), id: \.offset) { index, keyPath in
+            ForEach(Array(UserProfile.observedKeyPaths.enumerated()), id: \.offset) { index, keyPath in
                 Text("• \(String(describing: keyPath))")
                     .font(.caption2)
                     .foregroundColor(.secondary)

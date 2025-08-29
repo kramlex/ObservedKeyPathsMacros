@@ -1,8 +1,8 @@
+import Combine
 import SwiftCompilerPlugin
 import SwiftSyntax
 import SwiftSyntaxMacros
 import SwiftUI
-import Combine
 
 public struct GenerateObservedKeyPathsMacro: MemberMacro, ExtensionMacro {
     
@@ -39,10 +39,10 @@ public struct GenerateObservedKeyPathsMacro: MemberMacro, ExtensionMacro {
         static let _observationReaders: [(\(raw: typeName)) -> Void] = [\(raw: readersItems)]
         """
         
-        let publisherInternalDecl: DeclSyntax = """
+        let holderDecl: DeclSyntax = """
         @ObservationIgnored
         private lazy var _holder: ObservableObjectPublisherHolder = {
-            ObservableObjectPublisherHolder(changesPublisherUsingReaders())
+            ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
         }()
         """
         
@@ -53,7 +53,7 @@ public struct GenerateObservedKeyPathsMacro: MemberMacro, ExtensionMacro {
         }()
         """
         
-        return [keyPathsDecl, readersDecl, publisherDecl]
+        return [keyPathsDecl, readersDecl, holderDecl, publisherDecl]
     }
     
     // MARK: - Helpers
@@ -82,6 +82,7 @@ public struct GenerateObservedKeyPathsMacro: MemberMacro, ExtensionMacro {
             let name = String(pattern.identifier.text)
             
             let attrs = varDecl.attributes.compactMap { attr -> String? in
+                // swiftlint:disable:next identifier_name
                 if case let .attribute(a) = attr { return a.attributeName.trimmedDescription }
                 return nil
             }
@@ -89,8 +90,11 @@ public struct GenerateObservedKeyPathsMacro: MemberMacro, ExtensionMacro {
             let hasTracked = attrs.contains(where: { $0 == "ObservationTracked" || $0 == "_ObservationTracked" })
             let hasIgnored = attrs.contains(where: { $0 == "ObservationIgnored" || $0 == "_ObservationIgnored" })
             
-            if hasTracked { tracked.append(name) }
-            else if !hasIgnored { fallback.append(name) }
+            if hasTracked { 
+                tracked.append(name) 
+            } else if !hasIgnored { 
+                fallback.append(name) 
+            }
         }
         
         // если явно помеченных нет — используем «все подходящие»

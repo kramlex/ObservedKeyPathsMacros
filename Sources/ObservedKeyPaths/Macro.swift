@@ -1,9 +1,10 @@
-import SwiftSyntaxMacros
-import Foundation
 import Combine
+import Foundation
 import Observation
+import SwiftSyntaxMacros
 
 public protocol ObservationType: AnyObject {
+    // swiftlint:disable:next identifier_name
     static var _observationReaders: [(Self) -> Void] { get }
     static var observedKeyPaths: [PartialKeyPath<Self>] { get }
 }
@@ -36,7 +37,7 @@ public final class ObservableObjectPublisherHolder {
     public let objectWillChange: ObservableObjectPublisher
     public let anyPublisher: AnyPublisher<Void, Never>
     
-    public init(anyPublisher: @autoclosure @escaping () -> AnyPublisher<Void, Never>) {
+    public init(_ anyPublisher: @autoclosure @escaping () -> AnyPublisher<Void, Never>) {
         let observableObjectPublisher = ObservableObjectPublisher()
         self.objectWillChange = observableObjectPublisher
         let any = anyPublisher()

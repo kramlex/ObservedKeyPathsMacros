@@ -1,12 +1,12 @@
-import XCTest
+import ObservedKeyPathsMacros
 import SwiftSyntaxMacros
 import SwiftSyntaxMacrosTestSupport
-import ObservedKeyPathsMacros
+import XCTest
 
 final class ObservedKeyPathsMacrosTests: XCTestCase {
     
     let testMacros: [String: Macro.Type] = [
-        "GenerateObservedKeyPaths": GenerateObservedKeyPathsMacro.self,
+        "GenerateObservedKeyPaths": GenerateObservedKeyPathsMacro.self
     ]
     
     func testBasicMacroExpansion() throws {
@@ -32,6 +32,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                     }, {
                         _ = $0.age as Any
                     }]
+
+                @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
 
                 @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {
@@ -69,6 +74,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                     }]
 
                 @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
+
+                @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {
                     _holder.objectWillChange
                 }()
@@ -104,6 +114,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                     }]
 
                 @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
+
+                @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {
                     _holder.objectWillChange
                 }()
@@ -137,6 +152,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                 static let _observationReaders: [(TestClass) -> Void] = [{
                         _ = $0.instanceProperty as Any
                     }]
+
+                @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
 
                 @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {
@@ -178,6 +198,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                     }]
 
                 @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
+
+                @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {
                     _holder.objectWillChange
                 }()
@@ -213,6 +238,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                     }, {
                         _ = $0.value as Any
                     }]
+
+                @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
 
                 @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {
@@ -252,6 +282,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                     }]
 
                 @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
+
+                @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {
                     _holder.objectWillChange
                 }()
@@ -279,6 +314,11 @@ final class ObservedKeyPathsMacrosTests: XCTestCase {
                 static let observedKeyPaths: [PartialKeyPath<EmptyClass>] = []
 
                 static let _observationReaders: [(EmptyClass) -> Void] = []
+
+                @ObservationIgnored
+                private lazy var _holder: ObservableObjectPublisherHolder = {
+                    ObservableObjectPublisherHolder(self.changesPublisherUsingReaders())
+                }()
 
                 @ObservationIgnored
                 public lazy var objectWillChange: ObservableObjectPublisher = {

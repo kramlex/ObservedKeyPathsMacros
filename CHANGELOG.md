@@ -7,21 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- Initial release of ObservedKeyPathsMacros
-- `@GenerateObservedKeyPaths` macro for automatic generation of observed key paths
-- Support for `@ObservationTracked` and `@ObservationIgnored` attributes
-- Automatic detection of observable properties
-- Combine integration with `objectWillChange` publisher
-- Support for classes, structs, and actors
-- Comprehensive test coverage
+## [1.1.0] - 2024-08-29
 
-### Features
-- Automatically generates `observedKeyPaths` array for type-safe key path access
-- Creates observation readers for efficient change tracking
-- Integrates with SwiftUI and Observation framework
-- Provides backward compatibility with ObservableObject patterns
-- Lightweight and performant with no runtime overhead
+### Fixed
+- **Critical Bug Fix**: Fixed `self` capture issue in macro-generated code for `ObservableObjectPublisherHolder`
+- **Swift 6 Compatibility**: Resolved concurrent access warnings in observation tracking
+- **Macro Expansion**: Fixed missing `_holder` property generation in macro output
+- **Test Coverage**: Updated all tests to reflect corrected macro behavior
+
+### Changed
+- **Code Quality**: Improved code formatting and readability in macro implementation
+- **Import Order**: Reorganized imports for better organization
+- **CI Pipeline**: Enhanced GitHub Actions workflow with better caching and error handling
+- **Example Code**: Updated BasicExample.swift to use `final` classes for better Swift conformance
+
+### Technical Improvements
+- **Macro Generation**: Enhanced `@GenerateObservedKeyPaths` macro to properly handle `self` references
+- **Property Detection**: Improved logic for detecting observable properties
+- **SwiftLint**: Added configuration for better code quality enforcement
+- **Build System**: Optimized package structure and dependencies
 
 ## [1.0.0] - 2024-12-19
 
