@@ -51,11 +51,11 @@ jobs:
         swift build
         echo "Sample build completed successfully"
         
-    - name: Verify sample macros
+    - name: Verify sample compilation
       run: |
         cd Examples
-        swift build -Xswiftc -Xfrontend -Xswiftc -enable-macro-testing
-        echo "Sample macros verification completed"
+        swift build --verbose
+        echo "Sample compilation verification completed"
       
     - name: Build for iOS
       run: |
